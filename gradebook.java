@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 class gradebook{
   public static void checker(String currentYear) {
@@ -17,9 +18,29 @@ class gradebook{
         System.out.println(scan.nextLine());
       }
     } // The catch statement is then used to print out error messadges if there are errors.
-         // In this case, if the file isnt found, or any other kind of error. 
+         // In this case, if the file isnt found, or any other kind of error.
     catch (FileNotFoundException ex) {
-      System.out.println("no file");
+      Scanner input = new Scanner(System.in);
+      System.out.println("no file\nDo you want to create a new file for this new school year? ");
+      String newFile = input.nextLine();
+
+      if (newFile.equals("yes")) {
+        try {
+          System.out.print("New file name: ");
+          String newFileName = input.nextLine();
+
+          File newFileCreate = new File(newFileName + ".txt");
+
+          if (newFileCreate.createNewFile()) {
+            System.out.println("File Created: " + newFileCreate.getName());
+          } else {
+            System.out.println("File already exists");
+            System.exit(0);
+          }
+        } catch (IOException e){
+          System.out.println("Error occured.");
+        }
+      }
     } catch (Exception ex) {
       System.out.println("other");
     }
