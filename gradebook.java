@@ -7,6 +7,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 class gradebook{
+  public static void newFileMaker() {
+
+  }
+
   public static void checker(String currentYear) {
     // The try statement is used to check the code and see if there are any errors when executing it.
        // An alternative would be the use of the "throws FileNotFoundException" in the decleration of the function.
@@ -24,7 +28,7 @@ class gradebook{
          // In this case, if the file isnt found, or any other kind of error.
     catch (FileNotFoundException ex) {
       Scanner input = new Scanner(System.in);
-      System.out.println("no file\nDo you want to create a new file for this new school year? ");
+      System.out.println("No file found.\nDo you want to create a new file for this new school year? ");
       String newFile = input.nextLine();
 
       if (newFile.equals("yes")) {
@@ -68,12 +72,28 @@ class gradebook{
   }
 
   public static void schoolYear() {
+    String[] options = {"1) Check the grades from a school year.",
+                        "2) Write a new gradebook for a new school year",
+                        "3) Exit the program.",
+                        "\nSelect 1-3"};
+
+    for (int i = 0; i < options.length; i++) {
+      System.out.println(options[i]);
+    }
+
     Scanner input = new Scanner(System.in);
+    String choice = input.nextLine();
 
-    System.out.println("What school year do you wanna look at? ");
-    String currentYear = input.nextLine();
+    if (choice.equals("1")) {
+      System.out.println("What file do you want to look at?");
+      String currentYear = input.nextLine();
 
-    checker(currentYear);
+      checker(currentYear);
+    } else if (choice.equals("2")) {
+      newFileMaker();
+    } else if (choice.equals("3")) {
+      System.exit(0);
+    }
   }
 
   public static void main(String[] args) {
