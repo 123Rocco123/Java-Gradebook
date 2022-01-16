@@ -1,5 +1,8 @@
 import java.util.Scanner;
+
 import java.io.File;
+import java.io.FileWriter;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -33,11 +36,29 @@ class gradebook{
 
           if (newFileCreate.createNewFile()) {
             System.out.println("File Created: " + newFileCreate.getName());
+            System.out.println("Do you want to write to the file? ");
+            String writeToFile = input.nextLine();
+
+            if (writeToFile.equals("yes")) {
+              try {
+                FileWriter writerObject = new FileWriter(newFileName + ".txt");
+
+                System.out.println("What do you want to write? ");
+
+                String textToWrite = input.nextLine();
+                writerObject.write(textToWrite + ".txt");
+                writerObject.close();
+              } catch (IOException e) {
+                System.out.println("Error Occured");
+              }
+            } else {
+              System.exit(0);
+            }
           } else {
             System.out.println("File already exists");
             System.exit(0);
           }
-        } catch (IOException e){
+        } catch (IOException e) {
           System.out.println("Error occured.");
         }
       }
