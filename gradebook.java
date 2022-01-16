@@ -8,7 +8,23 @@ import java.io.IOException;
 
 class gradebook{
   public static void newFileMaker() {
+    Scanner input = new Scanner(System.in);
+    System.out.println("Write the name of the new file: ");
 
+    String newFileName = input.nextLine();
+
+    try {
+      File newFile = new File(newFileName + ".txt");
+
+      if (newFile.createNewFile()) {
+        System.out.println("New file created.");
+      } else {
+        System.out.println("File already exists");
+        newFileMaker();
+      }
+    } catch (IOException ex) {
+      System.out.println("An error occured.");
+    }
   }
 
   public static void checker(String currentYear) {
