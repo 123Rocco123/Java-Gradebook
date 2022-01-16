@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 class gradebook{
+  // The function is used to create a new file from the start of the program.
   public static void newFileMaker() {
     Scanner input = new Scanner(System.in);
     System.out.println("Write the name of the new file: ");
@@ -14,13 +15,17 @@ class gradebook{
     String newFileName = input.nextLine();
 
     try {
-      File newFile = new File(newFileName + ".txt");
-
-      if (newFile.createNewFile()) {
-        System.out.println("New file created.");
+      if (newFileName.equals("exit")) {
+        System.exit(0);
       } else {
-        System.out.println("File already exists");
-        newFileMaker();
+        File newFile = new File(newFileName + ".txt");
+
+        if (newFile.createNewFile()) {
+          System.out.println("New file created.");
+        } else {
+          System.out.println("File already exists");
+          newFileMaker();
+        }
       }
     } catch (IOException ex) {
       System.out.println("An error occured.");
