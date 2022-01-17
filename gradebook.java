@@ -24,7 +24,7 @@ class gradebook{
         // If statement used to check if the file that the user wants to create exists or not.
            // If it doesn't, then the if block is executed.
         if (newFile.createNewFile()) {
-          System.out.println("New file created.\nDo you want to write to the file now? ");
+          System.out.println("New file created.\nDo you want to write to the file now (yes/no)? ");
           String newInput = input.nextLine();
 
           if (newInput.equals("yes")) {
@@ -47,6 +47,7 @@ class gradebook{
       }
     } catch (IOException ex) {
       System.out.println("An error occured.");
+      schoolYear();
     }
   }
 
@@ -67,7 +68,7 @@ class gradebook{
          // In this case, if the file isnt found, or any other kind of error.
     catch (FileNotFoundException ex) {
       Scanner input = new Scanner(System.in);
-      System.out.println("No file found.\nDo you want to create a new file for this new school year? ");
+      System.out.println("No file found.\nDo you want to create a new file for this new school year (yes/no)? ");
       String newFile = input.nextLine();
 
       if (newFile.equals("yes")) {
