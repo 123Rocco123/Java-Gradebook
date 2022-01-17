@@ -14,14 +14,28 @@ class gradebook{
 
     String newFileName = input.nextLine();
 
+    // The try statement is used to execute the code, and the catch statement is used if / when an error occurs.
     try {
       if (newFileName.equals("exit")) {
         System.exit(0);
       } else {
         File newFile = new File(newFileName + ".txt");
 
+        // If statement used to check if the file that the user wants to create exists or not.
+           // If it doesn't, then the if block is executed.
         if (newFile.createNewFile()) {
-          System.out.println("New file created.");
+          System.out.println("New file created.\nDo you want to write to the file now? ");
+          String newInput = input.nextLine();
+
+          if (newInput.equals("yes")) {
+            System.out.println("Write out the most recent grades with their respective classes.");
+
+            FileWriter newGrades = new FileWriter(newFileName + ".txt");
+
+            String userNewGrades = input.nextLine();
+            newGrades.write(userNewGrades);
+            newGrades.close();
+          }
         } else {
           System.out.println("File already exists");
           newFileMaker();
