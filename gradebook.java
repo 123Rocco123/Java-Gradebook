@@ -35,10 +35,14 @@ class gradebook{
             String userNewGrades = input.nextLine();
             newGrades.write(userNewGrades);
             newGrades.close();
+
+            schoolYear();
+          } else {
+            schoolYear();
           }
         } else {
           System.out.println("File already exists");
-          newFileMaker();
+          schoolYear();
         }
       }
     } catch (IOException ex) {
@@ -67,50 +71,24 @@ class gradebook{
       String newFile = input.nextLine();
 
       if (newFile.equals("yes")) {
-        try {
-          System.out.print("New file name: ");
-          String newFileName = input.nextLine();
-
-          File newFileCreate = new File(newFileName + ".txt");
-
-          if (newFileCreate.createNewFile()) {
-            System.out.println("File Created: " + newFileCreate.getName());
-            System.out.println("Do you want to write to the file? ");
-            String writeToFile = input.nextLine();
-
-            if (writeToFile.equals("yes")) {
-              try {
-                FileWriter writerObject = new FileWriter(newFileName + ".txt");
-
-                System.out.println("What do you want to write? ");
-
-                String textToWrite = input.nextLine();
-                writerObject.write(textToWrite + ".txt");
-                writerObject.close();
-              } catch (IOException e) {
-                System.out.println("Error Occured");
-              }
-            } else {
-              System.exit(0);
-            }
-          } else {
-            System.out.println("File already exists");
-            System.exit(0);
-          }
-        } catch (IOException e) {
-          System.out.println("Error occured.");
-        }
+        System.out.println("");
+        newFileMaker();
+      } else {
+        System.out.println("");
+        schoolYear();
       }
     } catch (Exception ex) {
-      System.out.println("other");
+      System.out.println("Other error occured.");
+      schoolYear();
     }
   }
 
   public static void schoolYear() {
     String[] options = {"1) Check the grades from a school year.",
-                        "2) Write a new gradebook for a new school year",
-                        "3) Exit the program.",
-                        "\nSelect 1-3"};
+                        "2) Write a new gradebook for a new school year.",
+                        "3) Check the current text files in the folder.",
+                        "4) Exit the program.",
+                        "\nSelect 1-4"};
 
     for (int i = 0; i < options.length; i++) {
       System.out.println(options[i]);
@@ -127,6 +105,20 @@ class gradebook{
     } else if (choice.equals("2")) {
       newFileMaker();
     } else if (choice.equals("3")) {
+      // Used to create an object of the files in the working directory.
+      File fileFinder = new File(".");
+
+      // String array containing the names of the files in the working directory.
+      String[] fileList = fileFinder.list();
+
+      // The for each look and if statement are used to print out the text files in the working directory.
+      System.out.println("\nCurrent Files in Working Directory:\n");
+      for (String str : fileList) {
+        if (str.indexOf(".txt") >= 0) {
+          System.out.println(str);
+        }
+      }
+    } else if (choice.equals("4")) {
       System.exit(0);
     }
   }
